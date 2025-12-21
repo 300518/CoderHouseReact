@@ -1,0 +1,21 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo -->
+  <rect width="600" height="200" rx="20" fill="#0f172a"></rect>
+
+  <!-- Círculo decorativo estilo sol anime -->
+  <circle cx="110" cy="100" r="60" fill="#ef4444"></circle>
+  <circle cx="110" cy="100" r="45" fill="#facc15"></circle>
+
+  <!-- Estrella interior -->
+  <polygon points="110,70 118,92 142,92 122,106 130,128 110,114 90,128 98,106 78,92 102,92" fill="#0f172a"></polygon>
+
+  <!-- Texto principal -->
+  <text x="200" y="95" font-family="Verdana, Geneva, sans-serif" font-size="42" font-weight="bold" fill="#f8fafc">
+    Anime Store
+  </text>
+
+  <!-- Texto secundario -->
+  <text x="200" y="135" font-family="Verdana, Geneva, sans-serif" font-size="28" letter-spacing="3" fill="#38bdf8">
+    CHILE
+  </text>
+</svg>
