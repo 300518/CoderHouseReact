@@ -1,10 +1,43 @@
 import logoTienda from "../assets/animeStoreChile.svg";
 import CartWigdet from "./CartWidget";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="">
+      <Link className="navbar-brand" to="/">
+        <img
+          src={logoTienda}
+          className="navbar-logo"
+          alt="Anime Store Chile"
+          style={{ height: "40px" }}
+        ></img>
+      </Link>
+
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link className="nav-link" to="/category/catalogo">
+            Catalogo
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/category/ofertas">
+            Ofertas
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/category/figuras-accion">
+            Figuras de Acción
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/category/cartas-tgc">
+            Cartas TCG
+          </Link>
+        </li>
+      </ul>
+
+      {/* <a className="navbar-brand" href="">
         <img
           src={logoTienda}
           href="#"
@@ -27,6 +60,7 @@ const Navbar = () => {
           Cartas TCG
         </a>
       </div>
+      */}
       <CartWigdet></CartWigdet>
     </nav>
   );
