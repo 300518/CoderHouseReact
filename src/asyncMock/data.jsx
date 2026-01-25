@@ -35,7 +35,36 @@ const products = [
     category: "figuras-accion",
     img: "../src/assets/products/gokussj3.webp",
   },
+  {
+    id: "05",
+    name: " Llaveros figuras anime",
+    description: "Llavero Anime por unidad",
+    stock: 100,
+    price: 3000,
+    category: "ofertas",
+    img: "https://ae-pic-a1.aliexpress-media.com/kf/S4e9b509d84974afcbf0fe2715b26f7b58.jpg_960x960q75.jpg_.avif",
+  },
+  {
+    id: "06",
+    name: " Gatchapon DBZ",
+    description: "Gatchapon al azar de DBZ",
+    stock: 100,
+    price: 2000,
+    category: "ofertas",
+    img: "https://ae-pic-a1.aliexpress-media.com/kf/Sac98d77105174921bc1cd5c10c5f913au.jpg_960x960q75.jpg_.avif",
+  },
+  {
+    id: "07",
+    name: " Figura One Piece",
+    description: "Figura Ace & Sabo & Luffy One Piece",
+    stock: 2,
+    price: 30000,
+    category: "figuras-accion",
+    img: "https://www.weplay.cl/pub/media/catalog/product/cache/3f1b140c3c9f36fbf6b01dffb521c246/4/5/4573102690418-1.jpg",
+  }
+  
 ];
+
 
 let error = false;
 export const obtenerProductos = () => {

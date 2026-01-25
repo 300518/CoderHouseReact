@@ -6,10 +6,10 @@ import ItemDetail from "./ItemDetail";
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(false);
-  const { id } = useParams();
+  const { itemId } = useParams();
 
   useEffect(() => {
-    obtenerItem(id)
+    obtenerItem(itemId)
       .then((res) => {
         if (!res) {
           setError(true);
@@ -18,7 +18,7 @@ const ItemDetailContainer = () => {
         }
       })
       .catch(() => setError(true));
-  }, [id]);
+  }, [itemId]);
 
   if (error) {
     return <p className="text-center">Producto no encontrado</p>;
