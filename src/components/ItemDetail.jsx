@@ -4,11 +4,11 @@ import ItemCount from "./ItemCount";
 import { CartContext } from "../context/CartContext";
 
 const ItemDetail = ({ product }) => {
-  const { addItem } = useContext(CartContext);
+  const { agregarItem } = useContext(CartContext);
   const [added, setAdded] = useState(false);
 
   const handleAdd = (quantity) => {
-    addItem(product, quantity);
+    agregarItem(product, quantity);
     setAdded(true);
   };
 
