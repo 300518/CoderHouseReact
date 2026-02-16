@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
+import CheckoutForm from "./components/CheckoutForm";
+
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/item/:itemId" element={<ItemDetailContainer />} />
 
           <Route path="/cart" element={<Cart />} />
+
+          <Route path="/checkout" element={<CheckoutForm />} />
 
           <Route path="*" element={<h2>Página no encontrada</h2>} />
         </Routes>

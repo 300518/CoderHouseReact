@@ -1,25 +1,43 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { obtenerProductos } from "../asyncMock/data";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../services/firebase";
 import ItemList from "./ItemList";
 
 const ItemListContainer = () => {
   const [listaProductos, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { categoryId } = useParams();
 
   useEffect(() => {
-    obtenerProductos().then((data) => {
-      if (categoryId) {
-        const filteredProducts = data.filter(
-          (prod) => prod.category === categoryId
-        );
-        setProducts(filteredProducts);
-      } else {
-        setProducts(data);
-      }
-    });
+    const productsRef = collection(db, "productos");
+  
+    const q = categoryId
+      ? query(productsRef, where("category", "==", categoryId))
+      : productsRef;
+  
+    getDocs(q)
+      .then((snapshot) => {
+        const products = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+  
+        setProducts(products);
+      })
+      .catch((error) => {
+        console.log("Error al traer productos:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  
   }, [categoryId]);
+
+  if (loading) {
+    return <h2>Cargando productos...</h2>;
+  }
 
   return (
     <div>
