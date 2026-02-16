@@ -18,10 +18,15 @@ const Cart = () => {
         <CartItem key={item.id} item={item} />
       ))}
 
-      <h4>Total: ${precioFinal()}</h4>
+      <div className="card mt-4 shadow-sm">
+        <div className="card-body d-flex justify-content-between align-items-center">
+          <h4 className="mb-0">Total</h4>
+          <h4 className="mb-0 text-success">${precioFinal()}</h4>
+        </div>
+      </div>
 
-      <div className="mt-3 d-flex gap-2">
-        <button className="btn btn-danger" onClick={limpiaCarro}>
+      <div className="mt-4 d-flex justify-content-between">
+        <button className="btn btn-outline-danger" onClick={limpiaCarro}>
           Vaciar carrito
         </button>
 

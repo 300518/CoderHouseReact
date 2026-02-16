@@ -5,19 +5,29 @@ const CartItem = ({ item }) => {
   const { eliminarItem } = useContext(CartContext);
 
   return (
-    <div className="border p-3 mb-3 rounded">
-      <h5>{item.name}</h5>
-      <p>Cantidad: {item.quantity}</p>
-      <p>Precio unidad: ${item.price}</p>
-      <p>Subtotal: ${item.price * item.quantity}</p>
+    <div className="card mb-3 shadow-sm">
+  <div className="card-body d-flex justify-content-between align-items-center">
+    <div>
+      <h5 className="mb-1">{item.name}</h5>
+      <p className="mb-1">
+        Cantidad: <strong>{item.quantity}</strong>
+      </p>
+      <p className="mb-0">
+        Precio unitario: ${item.price}
+      </p>
+    </div>
 
+    <div className="text-end">
+      <h6>${item.price * item.quantity}</h6>
       <button
-        className="btn btn-danger btn-sm mt-2"
+        className="btn btn-outline-danger btn-sm mt-2"
         onClick={() => eliminarItem(item.id)}
       >
         Eliminar
       </button>
     </div>
+  </div>
+</div>
   );
 };
 

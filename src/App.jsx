@@ -8,12 +8,12 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
 import CheckoutForm from "./components/CheckoutForm";
 
-
 function App() {
   return (
-    <BrowserRouter>
-      <div>
+    <CartProvider>
+      <BrowserRouter>
         <Navbar />
+
         <Routes>
           <Route
             path="/"
@@ -32,8 +32,8 @@ function App() {
 
           <Route path="*" element={<h2>Página no encontrada</h2>} />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

@@ -12,31 +12,35 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     const productsRef = collection(db, "productos");
-  
+
     const q = categoryId
       ? query(productsRef, where("category", "==", categoryId))
       : productsRef;
-  
+
     getDocs(q)
       .then((snapshot) => {
         const products = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-  
+
         setProducts(products);
       })
-      .catch((error) => {
-        console.log("Error al traer productos:", error);
+      .catch(() => {
+        setProducts([]);
       })
       .finally(() => {
         setLoading(false);
       });
-  
   }, [categoryId]);
 
   if (loading) {
-    return <h2>Cargando productos...</h2>;
+    return (
+      <div className="text-center mt-5">
+        <div className="spinner-border" role="status"></div>
+        <p className="mt-2">Cargando productos...</p>
+      </div>
+    );
   }
 
   return (

@@ -1,8 +1,14 @@
 import { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const CheckoutForm = () => {
   const { cart, precioFinal, limpiaCarro } = useContext(CartContext);
+
+  const [loading, setLoading] = useState(false);
+
+  const [confirmEmail, setConfirmEmail] = useState("");
 
   const [buyer, setBuyer] = useState({
     name: "",
@@ -19,8 +25,15 @@ const CheckoutForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (buyer.email !== confirmEmail) {
+      alert("Los emails no coinciden");
+      return;
+    }
+
+    setLoading(true);
 
     const order = {
       buyer,
@@ -29,13 +42,15 @@ const CheckoutForm = () => {
       date: new Date(),
     };
 
-    console.log("Orden generada:", order);
-
-    // Simulamos ID
-    const fakeId = Math.random().toString(36).substring(2, 10);
-
-    setOrderId(fakeId);
-    limpiaCarro();
+    try {
+      const docRef = await addDoc(collection(db, "ordenes"), order);
+      setOrderId(docRef.id);
+      limpiaCarro();
+    } catch (error) {
+      console.log("Error al crear la orden:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (orderId) {
@@ -55,6 +70,15 @@ const CheckoutForm = () => {
   return (
     <div className="container mt-5">
       <h2>Finalizar compra</h2>
+      <div className="mb-4">
+        <h5>Resumen de compra</h5>
+        {cart.map((item) => (
+          <p key={item.id}>
+            {item.name} x {item.quantity}
+          </p>
+        ))}
+        <strong>Total: ${precioFinal()}</strong>
+      </div>
 
       <form onSubmit={handleSubmit} className="mt-4">
         <input
@@ -87,10 +111,23 @@ const CheckoutForm = () => {
           required
         />
 
+        <input
+          className="form-control mb-3"
+          type="email"
+          placeholder="Confirmar Email"
+          value={confirmEmail}
+          onChange={(e) => setConfirmEmail(e.target.value)}
+          required
+        />
+
         <h4>Total a pagar: ${precioFinal()}</h4>
 
-        <button className="btn btn-success mt-3" type="submit">
-          Confirmar compra
+        <button
+          className="btn btn-success mt-3"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? "Generando orden..." : "Confirmar compra"}
         </button>
       </form>
     </div>
