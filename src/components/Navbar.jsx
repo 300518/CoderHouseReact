@@ -1,23 +1,17 @@
 import logoTienda from "../assets/animeStoreChile.svg";
 import CartWigdet from "./CartWidget";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "nav-link active fw-bold" : "nav-link"
-        }
-        to="/"
-      >
+      <Link className="navbar-brand" to="/">
         <img
           src={logoTienda}
-          className="navbar-logo"
           alt="Anime Store Chile"
           style={{ height: "40px" }}
-        ></img>
-      </NavLink>
+        />
+      </Link>
 
       <ul className="navbar-nav">
         <li className="nav-item">

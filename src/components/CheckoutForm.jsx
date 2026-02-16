@@ -10,6 +10,8 @@ const CheckoutForm = () => {
 
   const [confirmEmail, setConfirmEmail] = useState("");
 
+  const [errorMsg, setErrorMsg] = useState("");
+
   const [buyer, setBuyer] = useState({
     name: "",
     phone: "",
@@ -46,8 +48,8 @@ const CheckoutForm = () => {
       const docRef = await addDoc(collection(db, "ordenes"), order);
       setOrderId(docRef.id);
       limpiaCarro();
-    } catch (error) {
-      console.log("Error al crear la orden:", error);
+    } catch {
+      setErrorMsg("Hubo un error al generar la orden. Intenta nuevamente.");
     } finally {
       setLoading(false);
     }
@@ -70,6 +72,7 @@ const CheckoutForm = () => {
   return (
     <div className="container mt-5">
       <h2>Finalizar compra</h2>
+      {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
       <div className="mb-4">
         <h5>Resumen de compra</h5>
         {cart.map((item) => (
