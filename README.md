@@ -46,21 +46,7 @@ git clone https://github.com/TU_USUARIO/TU_REPO.git
 npm install
 ```
 
-3.  Configurar variables de entorno:
-
-Crear un archivo `.env` en la raíz del proyecto con las siguientes
-variables:
-
-    VITE_API_KEY=xxxx
-    VITE_AUTH_DOMAIN=xxxx
-    VITE_PROJECT_ID=xxxx
-    VITE_STORAGE_BUCKET=xxxx
-    VITE_MESSAGING_SENDER_ID=xxxx
-    VITE_APP_ID=xxxx
-
-Los valores deben obtenerse desde Firebase Console.
-
-4.  Ejecutar el proyecto:
+3.  Ejecutar el proyecto:
 
 ``` bash
 npm run dev
