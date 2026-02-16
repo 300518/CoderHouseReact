@@ -25,13 +25,30 @@ const CheckoutForm = () => {
       ...buyer,
       [e.target.name]: e.target.value,
     });
+    setErrorMsg("");
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+
+    // Permite solo números y un + al inicio
+    const isValid = /^(\+)?\d*$/.test(value);
+
+    if (isValid) {
+      setBuyer({
+        ...buyer,
+        phone: value,
+      });
+
+      setErrorMsg("");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (buyer.email !== confirmEmail) {
-      alert("Los emails no coinciden");
+      setErrorMsg("Los emails no coinciden");
       return;
     }
 
@@ -98,9 +115,9 @@ const CheckoutForm = () => {
           className="form-control mb-3"
           type="tel"
           name="phone"
-          placeholder="Teléfono"
+          placeholder="Teléfono (ej: +56912345678)"
           value={buyer.phone}
-          onChange={handleChange}
+          onChange={handlePhoneChange}
           required
         />
 
@@ -119,7 +136,10 @@ const CheckoutForm = () => {
           type="email"
           placeholder="Confirmar Email"
           value={confirmEmail}
-          onChange={(e) => setConfirmEmail(e.target.value)}
+          onChange={(e) => {
+            setConfirmEmail(e.target.value);
+            setErrorMsg("");
+          }}
           required
         />
 
